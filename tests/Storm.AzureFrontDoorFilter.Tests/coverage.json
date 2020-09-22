@@ -1,0 +1,208 @@
+{
+  "Storm.AzureFrontDoorFilter.dll": {
+    "C:\\Users\\oysto\\dev\\github\\storm-azurefrontdoorfilter\\src\\Storm.AzureFrontDoorFilter\\AzureFrontDoorFilterMiddleware.cs": {
+      "Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddleware": {
+        "System.Void Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddleware::Configure(Microsoft.Extensions.Configuration.IConfiguration)": {
+          "Lines": {
+            "34": 25,
+            "36": 25,
+            "37": 25,
+            "38": 25,
+            "39": 21,
+            "40": 21,
+            "41": 20,
+            "42": 20,
+            "43": 24,
+            "44": 1,
+            "45": 1,
+            "46": 1,
+            "47": 1,
+            "48": 25
+          },
+          "Branches": [
+            {
+              "Line": 38,
+              "Offset": 22,
+              "EndOffset": 24,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 21
+            },
+            {
+              "Line": 40,
+              "Offset": 32,
+              "EndOffset": 34,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 40,
+              "Offset": 32,
+              "EndOffset": 40,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 20
+            },
+            {
+              "Line": 41,
+              "Offset": 43,
+              "EndOffset": 45,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 41,
+              "Offset": 43,
+              "EndOffset": 48,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 20
+            },
+            {
+              "Line": 41,
+              "Offset": 77,
+              "EndOffset": 79,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 41,
+              "Offset": 77,
+              "EndOffset": 90,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 20
+            },
+            {
+              "Line": 38,
+              "Offset": 22,
+              "EndOffset": 96,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 24
+            }
+          ]
+        },
+        "System.String Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddleware::GetHeaderValueOrDefault(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String,System.String)": {
+          "Lines": {
+            "64": 8,
+            "65": 8,
+            "66": 5,
+            "67": 5,
+            "70": 3,
+            "71": 8
+          },
+          "Branches": [
+            {
+              "Line": 65,
+              "Offset": 12,
+              "EndOffset": 14,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 5
+            },
+            {
+              "Line": 65,
+              "Offset": 12,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            }
+          ]
+        },
+        "System.Boolean Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddleware::IsAzureFrontDoorRequest(Microsoft.AspNetCore.Http.HttpRequest)": {
+          "Lines": {
+            "76": 13,
+            "77": 13,
+            "78": 5,
+            "79": 5,
+            "82": 8,
+            "83": 8,
+            "84": 13
+          },
+          "Branches": [
+            {
+              "Line": 77,
+              "Offset": 19,
+              "EndOffset": 21,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 5
+            },
+            {
+              "Line": 77,
+              "Offset": 19,
+              "EndOffset": 26,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 8
+            }
+          ]
+        },
+        "System.Void Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddleware::.ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger`1<Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddleware>)": {
+          "Lines": {
+            "24": 25,
+            "26": 25,
+            "27": 25,
+            "28": 25,
+            "29": 25,
+            "30": 25,
+            "31": 25
+          },
+          "Branches": []
+        }
+      },
+      "Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddleware/<InvokeAsync>d__9": {
+        "System.Void Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddleware/<InvokeAsync>d__9::MoveNext()": {
+          "Lines": {
+            "51": 13,
+            "52": 13,
+            "53": 8,
+            "54": 8,
+            "55": 8,
+            "57": 5,
+            "58": 5,
+            "59": 5,
+            "60": 5,
+            "61": 13
+          },
+          "Branches": [
+            {
+              "Line": 52,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 8
+            },
+            {
+              "Line": 52,
+              "Offset": 39,
+              "EndOffset": 157,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 5
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\oysto\\dev\\github\\storm-azurefrontdoorfilter\\src\\Storm.AzureFrontDoorFilter\\AzureFrontDoorFilterMiddlewareExtensions.cs": {
+      "Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddlewareExtensions": {
+        "Microsoft.AspNetCore.Builder.IApplicationBuilder Storm.AzureFrontDoorFilter.AzureFrontDoorFilterMiddlewareExtensions::UseAzureFrontDoorFilter(Microsoft.AspNetCore.Builder.IApplicationBuilder)": {
+          "Lines": {
+            "8": 25,
+            "9": 25,
+            "10": 25,
+            "11": 25
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+﻿[*.cs]
+
+dotnet_diagnostic.CA1034.severity = none
+dotnet_diagnostic.CA1812.severity = none
+dotnet_diagnostic.CA1034.severity = none
+
+dotnet_diagnostic.CA1724.severity = none
+dotnet_diagnostic.CA1303.severity = none
+dotnet_diagnostic.CA1710.severity = none
+dotnet_diagnostic.CA1062.severity = none
+
+# CA1052: Static holder types should be Static or NotInheritable
+dotnet_diagnostic.CA1052.severity = none
+
+# CA1032: Implement standard exception constructors
+dotnet_diagnostic.CA1032.severity = silent
+
+# CS8602: Dereference of a possibly null reference.
+dotnet_diagnostic.CS8602.severity = none
+
+# CA1307: Specify StringComparison
+dotnet_diagnostic.CA1307.severity = none

@@ -1,0 +1,93 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - release/*
+stages:
+  - stage: build
+    displayName: Execute Build
+    jobs:
+      - job: BuildArtifacts
+        displayName: Build Project Artifacts
+        pool:
+          vmImage: windows-latest
+        steps:
+          - checkout: self
+            persistCredentials: true
+          - task: UseDotNet@2
+            inputs:
+              packageType: "sdk"
+              version: "3.1.302"
+          - task: Cache@2
+            displayName: Cache dotnet tools
+            inputs:
+              key: 'tools | "$(Agent.OS)" | ./.config/dotnet-tools.json'
+              path: ".config/"
+          - task: Cache@2
+            displayName: Cache cake tools
+            inputs:
+              key: 'cake | "$(Agent.OS)" | ./.config/dotnet-tools.json'
+              path: "tools/"
+          - task: DotNetCoreCLI@2
+            displayName: Restore dotnet tools
+            inputs:
+              command: "custom"
+              custom: "tool"
+              arguments: "restore"
+          - task: DotNetCoreCLI@2
+            displayName: Run GitVersion
+            inputs:
+              command: "custom"
+              custom: "gitversion"
+              arguments: "/output buildserver /nofetch"
+          - task: DotNetCoreCLI@2
+            displayName: Run Cake
+            inputs:
+              command: "custom"
+              custom: "cake"
+              arguments: "--verbosity=$(cake.verbosity)"
+  - stage: PublishBeta
+    displayName: 'Publish Beta'
+    dependsOn: build
+    condition: and(Succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
+    jobs:
+    - job: PublishNuGet
+      displayName: 'Publish to NuGet'
+      pool:
+        vmImage: windows-latest
+      steps:   
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'specific'
+          itemPattern: '**'
+          downloadPath: '$(System.ArtifactsDirectory)'
+      - task: NuGetCommand@2
+        inputs:
+          command: 'push'
+          packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+          nuGetFeedType: 'external'
+          publishFeedCredentials: '$(artifacts.nuget.feed)'
+  - stage: PublishRelease
+    displayName: 'Publish Release'
+    dependsOn: build
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+    jobs:
+    - job: PublishNuGet
+      displayName: 'Publish to NuGet'
+      pool:
+        vmImage: windows-latest
+      steps:   
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'specific'
+          itemPattern: '**'
+          downloadPath: '$(System.ArtifactsDirectory)'
+      - task: NuGetCommand@2
+        inputs:
+          command: 'push'
+          packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+          nuGetFeedType: 'external'
+          publishFeedCredentials: '$(artifacts.nuget.feed)'
