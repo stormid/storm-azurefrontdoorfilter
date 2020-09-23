@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8</LangVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Phil Oyston, StormID</Authors>
+    <Company>Storm ID</Company>
+    <Description>Provides middleware to filter access to your web application based on the request originating through a specified set of Azure Front Door resources.</Description>
+    <PackageTags>azure front-door dotnet</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/stormid/storm-azurefrontdoorfilter</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +17,13 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

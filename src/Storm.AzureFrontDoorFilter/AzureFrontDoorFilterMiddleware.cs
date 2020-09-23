@@ -60,8 +60,13 @@ namespace Storm.AzureFrontDoorFilter
             }
         }
 
-        private static string GetHeaderValueOrDefault(IHeaderDictionary headers, string headerName, string defaultValue = default)
+        private static string? GetHeaderValueOrDefault(IHeaderDictionary headers, string headerName, string? defaultValue = default)
         {
+            if (headerName is null)
+            {
+                throw new ArgumentNullException(nameof(headerName));
+            }
+
             if (headers.TryGetValue(headerName, out var headerValue))
             {
                 return headerValue;
@@ -77,8 +82,8 @@ namespace Storm.AzureFrontDoorFilter
                 return true;
             }
 
-            var afdId = GetHeaderValueOrDefault(request.Headers, AfdIdHeaderName);
-            return approvedAfdIds.Contains(afdId);
+            var afdId = GetHeaderValueOrDefault(request.Headers, AfdIdHeaderName, AllowAllValue);
+            return approvedAfdIds.Contains(afdId ?? AllowAllValue);
         }
     }
 }
