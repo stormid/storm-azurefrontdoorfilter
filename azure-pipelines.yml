@@ -3,7 +3,6 @@ trigger:
   branches:
     include:
     - master
-    - refs/tags/*
 stages:
   - stage: build
     displayName: Execute Build
@@ -47,32 +46,10 @@ stages:
               command: "custom"
               custom: "cake"
               arguments: "--verbosity=$(cake.verbosity)"
-  - stage: PublishBeta
-    displayName: 'Publish Beta'
-    dependsOn: build
-    condition: and(Succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
-    jobs:
-    - job: PublishNuGet
-      displayName: 'Publish to NuGet'
-      pool:
-        vmImage: windows-latest
-      steps:   
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: 'current'
-          downloadType: 'specific'
-          itemPattern: '**'
-          downloadPath: '$(System.ArtifactsDirectory)'
-      - task: NuGetCommand@2
-        inputs:
-          command: 'push'
-          packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-          nuGetFeedType: 'external'
-          publishFeedCredentials: '$(artifacts.nuget.feed)'
   - stage: PublishRelease
-    displayName: 'Publish Release'
+    displayName: 'Publish to NuGet'
     dependsOn: build
-    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/head/master'))
     jobs:
     - job: PublishNuGet
       displayName: 'Publish to NuGet'
