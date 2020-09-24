@@ -3,7 +3,7 @@ trigger:
   branches:
     include:
     - master
-    - release/*
+    - refs/tags/*
 stages:
   - stage: build
     displayName: Execute Build
