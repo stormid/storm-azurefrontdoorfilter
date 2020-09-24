@@ -3,6 +3,7 @@ trigger:
   branches:
     include:
     - master
+    - refs/tags/*
 stages:
   - stage: build
     displayName: Execute Build
@@ -49,7 +50,7 @@ stages:
   - stage: PublishRelease
     displayName: 'Publish to NuGet'
     dependsOn: build
-    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/head/master'))
+    condition: and(Succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
     jobs:
     - job: PublishNuGet
       displayName: 'Publish to NuGet'
