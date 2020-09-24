@@ -59,7 +59,7 @@ stages:
   - stage: PublishRelease
     displayName: 'Publish to NuGet'
     dependsOn: build
-    condition: and(Succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    condition: and(Succeeded(), or(eq(variables['Build.SourceBranchName'], 'master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')))
     jobs:
     - job: PublishNuGet
       displayName: 'Publish to NuGet'
