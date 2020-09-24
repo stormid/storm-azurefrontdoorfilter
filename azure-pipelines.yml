@@ -3,6 +3,7 @@ trigger:
   branches:
     include:
     - master
+    - release/*
 stages:
   - stage: build
     displayName: Execute Build
@@ -46,6 +47,15 @@ stages:
               command: "custom"
               custom: "cake"
               arguments: "--verbosity=$(cake.verbosity)"
+          - task: GitTag@5
+            displayName: "Tag Artifacts"
+            condition: and(Succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
+            inputs:
+              workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
+              tagUser: 'pipeline'
+              tagEmail: 'pipeline@stormid.com'
+              tag: '$(build.buildNumber)'
+              useLightweightTags: true              
   - stage: PublishRelease
     displayName: 'Publish to NuGet'
     dependsOn: build

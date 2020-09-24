@@ -7,7 +7,7 @@ branches:
     mode: ContinuousDelivery
     tag: ''
   master:
-    tag: ci
+    tag: beta
   pull-request:
     mode: ContinuousDeployment
     tag: pr
